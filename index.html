@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Music App</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <h1>🎵 Keep on streaming</h1>
+    <button id="playBtn">▶</button>
+    <audio id="audioPlayer">
+      <source
+        src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+        type="audio/mpeg"
+      />
+    </audio>
+    <div id="progressContainer">
+        <div id="progressDisplayText">0:00 / 0:00</div>
+    </div>
+
+    <script src="index.js"></script>
+  </body>
+</html>
