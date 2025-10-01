@@ -1,8 +1,18 @@
 const playBtn = document.querySelector("#playBtn");
+const prevBtn = document.querySelector("#prevBtn");
+const nextBtn = document.querySelector("#nextBtn");
 const audioPlayer = document.querySelector("#audioPlayer");
 const progressDisplayText = document.querySelector("#progressDisplayText");
 const progressBar = document.querySelector("#progressBar");
 const progressContainer = document.querySelector("#progressContainer");
+
+const songs = [
+  "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+  "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+  "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
+];
+
+let currentSongIndex = 0;
 
 function convertSecondstoMinsSecs(seconds) {
   if (!Number.isFinite(seconds) || seconds < 0) return "0:00";
@@ -10,6 +20,30 @@ function convertSecondstoMinsSecs(seconds) {
   const secs = Math.floor(seconds % 60);
   return ` ${mins}:${secs < 10 ? "0" : ""}${secs}`;
 }
+
+function loadSong(index) {
+  currentSongIndex = index;
+  audioPlayer.src = songs[index];
+  audioPlayer.load();
+  audioPlayer.play();
+  playBtn.textContent = "⏸";
+}
+
+function nextSong() {
+  currentSongIndex = (currentSongIndex + 1) % songs.length;
+  loadSong(currentSongIndex);
+}
+
+function prevSong() {
+  currentSongIndex =
+    currentSongIndex === 0 ? songs.length - 1 : currentSongIndex - 1;
+  loadSong(currentSongIndex);
+}
+
+window.addEventListener("load", () => {
+  audioPlayer.src = songs[0];
+  audioPlayer.load;
+});
 
 audioPlayer.addEventListener("timeupdate", () => {
   const currentTime = convertSecondstoMinsSecs(audioPlayer.currentTime);
@@ -38,6 +72,10 @@ playBtn.addEventListener("click", () => {
     playBtn.textContent = "▶";
   }
 });
+
+nextBtn.addEventListener("click", nextSong);
+prevBtn.addEventListener("click", prevSong);
+audioPlayer.addEventListener("ended", nextSong);
 
 progressContainer.addEventListener("click", (e) => {
   const rect = e.currentTarget.getBoundingClientRect();

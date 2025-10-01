@@ -5,19 +5,26 @@ body {
   color: #333;
 }
 
+#controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
 button {
-  padding: 10px 30px;
+  padding: 5px 10px;
   border-radius: 10px;
   border: none;
-  color: #fff;
-  background-color: rgb(249, 86, 26);
+  color: #edcecefd;
+  background-color: rgb(224, 30, 211);
   cursor: pointer;
-  font-size: 16px;
+  font-size: 20px;
   transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: rgb(85, 235, 15);
+  background-color: rgb(123, 5, 114);
 }
 
 #progressDisplayText {
@@ -25,7 +32,7 @@ button:hover {
 }
 
 #progressContainer {
-  margin-top: 10px;
+  margin: 10px auto;
   background-color: #ccc;
   width: 595px;
   height: 8px;
