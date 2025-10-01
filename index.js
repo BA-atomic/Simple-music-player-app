@@ -1,6 +1,7 @@
 const playBtn = document.querySelector("#playBtn");
 const prevBtn = document.querySelector("#prevBtn");
 const nextBtn = document.querySelector("#nextBtn");
+const volume = document.querySelector("#volumeId");
 const audioPlayer = document.querySelector("#audioPlayer");
 const progressDisplayText = document.querySelector("#progressDisplayText");
 const progressBar = document.querySelector("#progressBar");
@@ -40,9 +41,23 @@ function prevSong() {
   loadSong(currentSongIndex);
 }
 
+function updateVolume() {
+  audioPlayer.volume = volume.value;
+
+  if(audioPlayer.volume === 1) {
+    console.log('too high')
+  } else if(audioPlayer.volume === 0.5) {
+        console.log("medium");
+  } else if(audioPlayer.volume === 0) {
+    console.log("too low");
+  }
+}
+
 window.addEventListener("load", () => {
   audioPlayer.src = songs[0];
   audioPlayer.load;
+
+  updateVolume();
 });
 
 audioPlayer.addEventListener("timeupdate", () => {
@@ -73,6 +88,7 @@ playBtn.addEventListener("click", () => {
   }
 });
 
+volume.addEventListener("input", updateVolume);
 nextBtn.addEventListener("click", nextSong);
 prevBtn.addEventListener("click", prevSong);
 audioPlayer.addEventListener("ended", nextSong);

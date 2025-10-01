@@ -27,6 +27,24 @@ button:hover {
   background-color: rgb(123, 5, 114);
 }
 
+#volumeId {
+  appearance: none;
+  background: transparent;
+}
+
+#volumeId::-webkit-slider-runnable-track {
+  background-color: #f0f0c9;
+  border-radius: 10px;
+  height: 8px;
+  cursor: pointer;
+}
+
+#volumeId::-webkit-slider-thumb {
+  margin-top: -4px;
+  background-color: #124e78;
+  cursor: pointer;
+}
+
 #progressDisplayText {
   margin-top: 10px;
 }
