@@ -2,6 +2,7 @@ const playBtn = document.querySelector("#playBtn");
 const prevBtn = document.querySelector("#prevBtn");
 const nextBtn = document.querySelector("#nextBtn");
 const volume = document.querySelector("#volumeId");
+const volumeIcon = document.querySelector("#volumeIcon");
 const audioPlayer = document.querySelector("#audioPlayer");
 const progressDisplayText = document.querySelector("#progressDisplayText");
 const progressBar = document.querySelector("#progressBar");
@@ -44,18 +45,20 @@ function prevSong() {
 function updateVolume() {
   audioPlayer.volume = volume.value;
 
-  if(audioPlayer.volume === 1) {
-    console.log('too high')
-  } else if(audioPlayer.volume === 0.5) {
-        console.log("medium");
-  } else if(audioPlayer.volume === 0) {
-    console.log("too low");
+  if (audioPlayer.volume === 0) {
+    volumeIcon.textContent = "🔇";
+  } else if (audioPlayer.volume < 0.29) {
+    volumeIcon.textContent = "🔈";
+  } else if (audioPlayer.volume < 0.69) {
+    volumeIcon.textContent = "🔉";
+  } else {
+    volumeIcon.textContent = "🔊";
   }
 }
 
 window.addEventListener("load", () => {
   audioPlayer.src = songs[0];
-  audioPlayer.load;
+  audioPlayer.load();
 
   updateVolume();
 });
