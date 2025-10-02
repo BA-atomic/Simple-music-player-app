@@ -7,32 +7,47 @@
     <link rel="stylesheet" href="index.css" />
   </head>
   <body>
-    <h1>🎵 Keep on streaming</h1>
-    <div id="controls">
-      <button id="prevBtn">⏮</button>
-      <button id="playBtn">▶</button>
-      <button id="nextBtn">⏭</button>
-      <span id="volumeIcon">🔊</span>
-      <input
-        id="volumeId"
-        type="range"
-        min="0"
-        max="1"
-        step="0.01"
-        value="0.7"
-      />
-    </div>
-    <div id="nowPlaying">
-      <span>Now playing:</span>
-      <p id="title"></p>
-      <p>By</p>
-      <p id="artist"></p>
-    </div>
-    <audio id="audioPlayer">src="" type="audio/mpeg"</audio>
-    <div id="progressDisplayText">0:00 / 0:00</div>
+    <div id="musicApp">
+      <div id="container">
+        <h1>🎵 Keep on streaming</h1>
 
-    <div id="progressContainer">
-      <div id="progressBar"></div>
+        <div id="box">
+          <span>Now playing:</span>
+          <p id="title"></p>
+          <p>By</p>
+          <p id="artist"></p>
+        </div>
+
+        <div id="progressContainer">
+          <div id="progressBar"></div>
+          <div id="progressDisplayText">0:00 / 0:00</div>
+        </div>
+
+        <div id="controls">
+          <div id="buttons">
+            <button id="prevBtn">⏮</button>
+            <button id="playBtn">▶</button>
+            <button id="nextBtn">⏭</button>
+          </div>
+
+          <div id="volumeControl">
+            <span id="volumeIcon">🔊</span>
+            <input
+              id="volumeId"
+              type="range"
+              min="0"
+              max="1"
+              step="0.01"
+              value="0.7"
+            />
+          </div>
+        </div>
+
+        <div id="nowPlaying"></div>
+        <audio id="audioPlayer">type="audio/mpeg"</audio>
+      </div>
+
+      <div id="playList"></div>
     </div>
 
     <script src="index.js"></script>
