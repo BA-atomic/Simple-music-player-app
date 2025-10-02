@@ -3,15 +3,39 @@ const prevBtn = document.querySelector("#prevBtn");
 const nextBtn = document.querySelector("#nextBtn");
 const volume = document.querySelector("#volumeId");
 const volumeIcon = document.querySelector("#volumeIcon");
+const title = document.querySelector("#title");
+const artist = document.querySelector("#artist");
 const audioPlayer = document.querySelector("#audioPlayer");
 const progressDisplayText = document.querySelector("#progressDisplayText");
 const progressBar = document.querySelector("#progressBar");
 const progressContainer = document.querySelector("#progressContainer");
 
 const songs = [
-  "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-  "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
-  "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
+  {
+    title: "SoundHelix Song 1",
+    artist: "SoundHelix",
+    url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+  },
+  {
+    title: "SoundHelix Song 2",
+    artist: "SoundHelix",
+    url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+  },
+  {
+    title: "SoundHelix Song 3",
+    artist: "SoundHelix",
+    url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
+  },
+  {
+    title: "SoundHelix Song 4",
+    artist: "SoundHelix",
+    url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",
+  },
+  {
+    title: "SoundHelix Song 5",
+    artist: "SoundHelix",
+    url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3",
+  },
 ];
 
 let currentSongIndex = 0;
@@ -23,23 +47,30 @@ function convertSecondstoMinsSecs(seconds) {
   return ` ${mins}:${secs < 10 ? "0" : ""}${secs}`;
 }
 
-function loadSong(index) {
-  currentSongIndex = index;
-  audioPlayer.src = songs[index];
-  audioPlayer.load();
+function playSong() {
   audioPlayer.play();
   playBtn.textContent = "⏸";
+}
+
+function loadSong(index) {
+  currentSongIndex = index;
+  audioPlayer.src = songs[index].url;
+  audioPlayer.load();
+  title.textContent = songs[index].title;
+  artist.textContent = songs[index].artist;
 }
 
 function nextSong() {
   currentSongIndex = (currentSongIndex + 1) % songs.length;
   loadSong(currentSongIndex);
+  playSong();
 }
 
 function prevSong() {
   currentSongIndex =
     currentSongIndex === 0 ? songs.length - 1 : currentSongIndex - 1;
   loadSong(currentSongIndex);
+  playSong();
 }
 
 function updateVolume() {
@@ -57,8 +88,7 @@ function updateVolume() {
 }
 
 window.addEventListener("load", () => {
-  audioPlayer.src = songs[0];
-  audioPlayer.load();
+  loadSong(0);
 
   updateVolume();
 });
