@@ -12,8 +12,9 @@ body {
 
 #musicApp {
   display: flex;
+  margin: 20px;
   gap: 10px;
-  height: 100vh;
+  height: 90vh;
 }
 
 h1 {
@@ -145,6 +146,8 @@ button:hover {
   color: #f0f0c9;
   cursor: pointer;
   transition: background-color 0.1s ease;
+  border-radius: 4px;
+  padding: 5px;
 }
 
 .playListSong.active {
@@ -154,9 +157,10 @@ button:hover {
 #songBox {
   width: 150px;
   height: 150px;
-  background-color: #124e78;
+  background: linear-gradient(45deg, #124e78, #1f6f8b);
   border-radius: 4px;
   font-size: 12px;
+  margin-bottom: 4px;
 }
 
 #songName {

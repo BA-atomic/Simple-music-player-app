@@ -160,7 +160,10 @@ playBtn.addEventListener("click", () => {
 volume.addEventListener("input", updateVolume);
 nextBtn.addEventListener("click", nextSong);
 prevBtn.addEventListener("click", prevSong);
-audioPlayer.addEventListener("ended", nextSong);
+audioPlayer.addEventListener("ended", () => {
+  nextSong()
+  highlightCurrentSong(currentSongIndex)
+});
 
 progressContainer.addEventListener("click", (e) => {
   const rect = e.currentTarget.getBoundingClientRect();
