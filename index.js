@@ -10,57 +10,79 @@ const progressDisplayText = document.querySelector("#progressDisplayText");
 const progressBar = document.querySelector("#progressBar");
 const progressContainer = document.querySelector("#progressContainer");
 const playList = document.querySelector("#playList");
+const coverArt = document.querySelector("#coverArt");
+const box = document.querySelector("#box");
 
 const songs = [
   {
     title: "SoundHelix Song 1",
     artist: "DJ Harmony",
     url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+    cover:
+      "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop", // DJ vinyl
   },
   {
     title: "SoundHelix Song 2",
     artist: "Electro Vibes",
     url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+    cover:
+      "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&h=400&fit=crop", // neon lights
   },
   {
     title: "SoundHelix Song 3",
     artist: "Midnight Beats",
     url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
+    cover:
+      "https://images.unsplash.com/photo-1526481280691-906f61c3965a?w=400&h=400&fit=crop", // dark city
   },
   {
     title: "SoundHelix Song 4",
     artist: "Lofi Dreams",
     url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",
+    cover:
+      "https://images.unsplash.com/photo-1513883049090-d0b7439799bf?w=400&h=400&fit=crop", // chill vibes
   },
   {
     title: "SoundHelix Song 5",
     artist: "The Chill Collective",
     url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3",
+    cover:
+      "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=400&h=400&fit=crop", // nature calm
   },
   {
     title: "SoundHelix Song 6",
     artist: "Urban Flow",
     url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3",
+    cover:
+      "https://images.unsplash.com/photo-1507874457470-272b3c8d8ee2?w=400&h=400&fit=crop", // city night
   },
   {
     title: "SoundHelix Song 7",
     artist: "Neon Skyline",
     url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3",
+    cover:
+      "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=400&h=400&fit=crop", // neon skyline
   },
   {
     title: "SoundHelix Song 8",
     artist: "Groove Masters",
     url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3",
+    cover:
+      "https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?w=400&h=400&fit=crop", // vinyl collection
   },
   {
     title: "SoundHelix Song 9",
     artist: "Cloud Nine",
     url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3",
+    cover:
+      "https://images.unsplash.com/photo-1503264116251-35a269479413?w=400&h=400&fit=crop", // dreamy clouds
   },
   {
     title: "SoundHelix Song 10",
     artist: "Rhythm Avenue",
     url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3",
+    cover:
+      "https://images.unsplash.com/photo-1507874457470-272b3c8d8ee2?w=400&h=400&fit=crop", // street style
   },
 ];
 
@@ -97,6 +119,7 @@ function isPlaying() {
 function loadSong(index) {
   currentSongIndex = index;
   audioPlayer.src = songs[index].url;
+  coverArt.src = songs[index].cover;
   audioPlayer.load();
   title.textContent = songs[index].title;
   artist.textContent = songs[index].artist;
@@ -142,6 +165,12 @@ function highlightCurrentSong(index) {
   });
 }
 
+function changeImage(fallback) {
+  let defaultImage = "error-image/error-image1.jpg";
+  fallback.src = defaultImage;
+  fallback.alt = "no cover";
+}
+
 window.addEventListener("load", () => {
   loadSong(0);
   updateVolume();
@@ -179,7 +208,7 @@ const playListItems = [];
 songs.forEach((song, idx) => {
   const playListDiv = document.createElement("div");
   playListDiv.innerHTML = `
-  <div id="songBox"></div>
+   <img class="playlistCover" src="${song.cover}" alt="Cover Photo" />
   <p id="songName">${song.title}</p>
   <p id="songArtist">${song.artist}</p>
 `;
@@ -203,4 +232,14 @@ document.addEventListener("keydown", (event) => {
   } else if (event.code === "ArrowRight") {
     nextSong();
   }
+});
+
+coverArt.addEventListener("error", () => {
+  changeImage(coverArt);
+});
+
+document.querySelectorAll(".playlistCover").forEach((img) => {
+  img.addEventListener("error", () => {
+    changeImage(img);
+  });
 });
