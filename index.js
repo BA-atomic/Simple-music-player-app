@@ -78,6 +78,22 @@ function playSong() {
   playBtn.textContent = "⏸";
 }
 
+function isPlaying() {
+  if (audioPlayer.paused) {
+    audioPlayer
+      .play()
+      .then(() => {
+        playBtn.textContent = "⏸";
+      })
+      .catch((error) => {
+        console.log("❌Play failed:", error);
+      });
+  } else {
+    audioPlayer.pause();
+    playBtn.textContent = "▶";
+  }
+}
+
 function loadSong(index) {
   currentSongIndex = index;
   audioPlayer.src = songs[index].url;
@@ -90,6 +106,7 @@ function loadSong(index) {
 function nextSong() {
   currentSongIndex = (currentSongIndex + 1) % songs.length;
   loadSong(currentSongIndex);
+  highlightCurrentSong(currentSongIndex);
   playSong();
 }
 
@@ -97,6 +114,7 @@ function prevSong() {
   currentSongIndex =
     currentSongIndex === 0 ? songs.length - 1 : currentSongIndex - 1;
   loadSong(currentSongIndex);
+  highlightCurrentSong(currentSongIndex);
   playSong();
 }
 
@@ -141,28 +159,13 @@ audioPlayer.addEventListener("timeupdate", () => {
   }
 });
 
-playBtn.addEventListener("click", () => {
-  if (audioPlayer.paused) {
-    audioPlayer
-      .play()
-      .then(() => {
-        playBtn.textContent = "⏸";
-      })
-      .catch((error) => {
-        console.log("❌Play failed:", error);
-      });
-  } else {
-    audioPlayer.pause();
-    playBtn.textContent = "▶";
-  }
-});
-
+playBtn.addEventListener("click", isPlaying);
 volume.addEventListener("input", updateVolume);
 nextBtn.addEventListener("click", nextSong);
 prevBtn.addEventListener("click", prevSong);
 audioPlayer.addEventListener("ended", () => {
-  nextSong()
-  highlightCurrentSong(currentSongIndex)
+  nextSong();
+  highlightCurrentSong(currentSongIndex);
 });
 
 progressContainer.addEventListener("click", (e) => {
@@ -191,4 +194,13 @@ songs.forEach((song, idx) => {
   });
 });
 
-
+document.addEventListener("keydown", (event) => {
+  if (event.code === "Space") {
+    event.preventDefault();
+    isPlaying();
+  } else if (event.code === "ArrowLeft") {
+    prevSong();
+  } else if (event.code === "ArrowRight") {
+    nextSong();
+  }
+});
