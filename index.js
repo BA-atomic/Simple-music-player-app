@@ -3,8 +3,8 @@ const prevBtn = document.querySelector("#prevBtn");
 const nextBtn = document.querySelector("#nextBtn");
 const volume = document.querySelector("#volumeId");
 const volumeIcon = document.querySelector("#volumeIcon");
-const title = document.querySelector("#title");
-const artist = document.querySelector("#artist");
+const title = document.querySelector(".title");
+const artist = document.querySelector(".artist");
 const audioPlayer = document.querySelector("#audioPlayer");
 const progressDisplayText = document.querySelector("#progressDisplayText");
 const progressBar = document.querySelector("#progressBar");
@@ -17,7 +17,7 @@ const songs = [
   {
     title: "SoundHelix Song 1",
     artist: "DJ Harmony",
-    url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+    url: "https://www.sondhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
     cover:
       "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop", // DJ vinyl
   },
@@ -109,11 +109,36 @@ function isPlaying() {
       })
       .catch((error) => {
         console.log("❌Play failed:", error);
+        displayError(
+          "Couldn't play audio. Check your connection and try again."
+        );
       });
   } else {
     audioPlayer.pause();
     playBtn.textContent = "▶";
   }
+}
+
+const errorContainer = document.querySelector("#showError");
+const overlayError = document.querySelector("#overlayError");
+let errorTimeOut;
+
+function displayError(message) {
+  clearTimeout(errorTimeOut);
+  errorContainer.innerHTML = "";
+  overlayError.innerHTML = "";
+  const errorMesssage = document.createElement("p");
+  const overlayColor = document.createElement("div");
+  errorMesssage.textContent = message;
+  errorContainer.classList.add("show");
+  overlayError.classList.add("show");
+  errorContainer.append(errorMesssage);
+  overlayError.append(overlayColor);
+
+  errorTimeOut = setTimeout(() => {
+    errorContainer.classList.remove("show");
+    overlayError.classList.remove("show");
+  }, 2000);
 }
 
 function loadSong(index) {
@@ -209,8 +234,8 @@ songs.forEach((song, idx) => {
   const playListDiv = document.createElement("div");
   playListDiv.innerHTML = `
    <img class="playlistCover" src="${song.cover}" alt="Cover Photo" />
-  <p id="songName">${song.title}</p>
-  <p id="songArtist">${song.artist}</p>
+  <p class="title">${song.title}</p>
+  <p class="artist">${song.artist}</p>
 `;
   playListDiv.classList.add("playListSong");
   playList.append(playListDiv);
