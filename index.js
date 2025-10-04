@@ -12,12 +12,14 @@ const progressContainer = document.querySelector("#progressContainer");
 const playList = document.querySelector("#playList");
 const coverArt = document.querySelector("#coverArt");
 const box = document.querySelector("#box");
+const errorContainer = document.querySelector("#showError");
+const overlayError = document.querySelector("#overlayError");
 
 const songs = [
   {
     title: "SoundHelix Song 1",
     artist: "DJ Harmony",
-    url: "https://www.sondhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+    url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
     cover:
       "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop", // DJ vinyl
   },
@@ -119,10 +121,7 @@ function isPlaying() {
   }
 }
 
-const errorContainer = document.querySelector("#showError");
-const overlayError = document.querySelector("#overlayError");
 let errorTimeOut;
-
 function displayError(message) {
   clearTimeout(errorTimeOut);
   errorContainer.innerHTML = "";
