@@ -1,20 +1,59 @@
+/* RESET */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body {
-  background-color: #ccc;
-  font-family: Arial, Helvetica, sans-serif;
-  color: #f0f0c9;
+/* ===========================
+   THEME VARIABLES
+=========================== */
+.light {
+  --white: #f0f0f0;
+  --textColor: #1c1c1c;
+
+  --container-bg: #464f51;
+  --playlist-bg: #95a78d;
+  --button-bg: #defff2;
+  --button-hover: #e1f4cb;
+  --progress-bg: #f3c98b;
+  --progress-track: #ccc;
+  --error-bg: rgba(255, 0, 0, 0.445);
+  --overlay-bg: rgba(0, 0, 0, 0.4);
+  --player-text: #ccc;
 }
 
+.dark {
+  --white: #1a1a1a;
+  --textColor: #f5f5f5;
+
+  --container-bg: #2a2a2d;
+  --playlist-bg: #3b3b3f;
+  --button-bg: #33363a;
+  --button-hover: #4a4d52;
+  --progress-bg: #f3c98b;
+  --progress-track: #555;
+  --error-bg: rgba(255, 75, 75, 0.4);
+  --overlay-bg: rgba(0, 0, 0, 0.7);
+  --player-text: #ddd;
+}
+
+/* ===========================
+   GLOBAL STYLES
+=========================== */
+body {
+  background-color: var(--white);
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--textColor);
+  transition: background-color 0.2s ease;
+}
+
+/* Layout */
 #musicApp {
   display: flex;
   margin: 20px;
   gap: 10px;
-  height: 85vh;
+  height: 90vh;
 }
 
 h1 {
@@ -23,13 +62,15 @@ h1 {
   margin-bottom: 20px;
 }
 
+/* Container */
 #container {
   padding: 20px 10px;
-  background-color: #464f51;
+  background-color: var(--container-bg);
   border-radius: 10px;
   box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2);
 }
 
+/* Player Box */
 #box {
   display: flex;
   flex-direction: column;
@@ -41,7 +82,7 @@ h1 {
   height: 50vh;
   margin-bottom: 10px;
   font-size: 12px;
-  color: #ccc;
+  color: var(--player-text);
 }
 
 #coverInfo {
@@ -59,6 +100,7 @@ h1 {
   margin-bottom: 8px;
 }
 
+/* Controls */
 #controls {
   display: flex;
   align-items: center;
@@ -75,6 +117,7 @@ h1 {
   margin-bottom: 15px;
 }
 
+/* Buttons */
 button {
   display: flex;
   align-items: center;
@@ -82,24 +125,25 @@ button {
   padding: 5px 10px;
   border-radius: 8px;
   border: none;
-  color: #333;
-  background-color: #defff2;
+  color: var(--textColor);
+  background-color: var(--button-bg);
   cursor: pointer;
   font-size: 20px;
   transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: #e1f4cb;
+  background-color: var(--button-hover);
 }
 
+/* Volume Control */
 #volumeId {
   appearance: none;
   background: transparent;
 }
 
 #volumeId::-webkit-slider-runnable-track {
-  background-color: #f0f0c9;
+  background-color: var(--progress-track);
   border-radius: 10px;
   height: 5px;
   cursor: pointer;
@@ -111,14 +155,7 @@ button:hover {
   cursor: pointer;
 }
 
-#nowPlaying {
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-}
-
+/* Progress Bar */
 #progress {
   margin: 0 auto;
   width: 90%;
@@ -126,7 +163,7 @@ button:hover {
 }
 
 #progressContainer {
-  background-color: #ccc;
+  background-color: var(--progress-track);
   width: 100%;
   height: 6px;
   border-radius: 10px;
@@ -137,19 +174,20 @@ button:hover {
   width: 0%;
   height: 100%;
   border-radius: 10px;
-  background-color: #f3c98b;
+  background-color: var(--progress-bg);
 }
 
 #progressDisplayText {
-  color: #ccc;
+  color: var(--player-text);
 }
 
+/* Playlist */
 #playList {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 4px;
   padding: 20px 10px;
-  background-color: #95a78d;
+  background-color: var(--playlist-bg);
   border-radius: 10px;
   overflow: auto;
   scrollbar-width: none;
@@ -181,21 +219,21 @@ button:hover {
   font-size: 12px;
 }
 
+/* Error Overlay */
 #showError {
   position: fixed;
-  background-color: rgba(255, 0, 0, 0.445);
+  background-color: var(--error-bg);
   width: 450px;
   height: 50px;
   left: 50%;
   top: 40%;
   transform: translateX(-50%);
   border-radius: 10px;
-  color: #ccc;
+  color: var(--textColor);
   display: none;
   padding: 16px 18px;
   box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(2px);
-
   z-index: 999;
 }
 
@@ -209,7 +247,7 @@ button:hover {
   position: fixed;
   height: 100vh;
   width: 100vw;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: var(--overlay-bg);
   backdrop-filter: blur(4px);
   transition: background-color 0.6s ease;
   z-index: 998;
@@ -218,6 +256,7 @@ button:hover {
   display: none;
 }
 
+/* Animations */
 @keyframes fadeOut {
   0%,
   80% {

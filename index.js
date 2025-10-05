@@ -14,6 +14,8 @@ const coverArt = document.querySelector("#coverArt");
 const box = document.querySelector("#box");
 const errorContainer = document.querySelector("#showError");
 const overlayError = document.querySelector("#overlayError");
+const toggleBtn = document.querySelector("#themeToggle");
+const body = document.body;
 
 const songs = [
   {
@@ -266,4 +268,31 @@ document.querySelectorAll(".playlistCover").forEach((img) => {
   img.addEventListener("error", () => {
     changeImage(img);
   });
+});
+
+window.addEventListener("load", () => {
+  const savedTheme = localStorage.getItem("theme");
+
+  if (savedTheme) {
+    body.className = savedTheme;
+    if (savedTheme === "dark") {
+      toggleBtn.textContent = "☀️";
+    } else {
+      toggleBtn.textContent = "🌙";
+    }
+  } else {
+    body.classList.add("light");
+  }
+});
+
+toggleBtn.addEventListener("click", () => {
+  if (body.classList.contains("light")) {
+    body.classList.replace("light", "dark");
+    toggleBtn.textContent = "☀️";
+    localStorage.setItem("theme", "dark");
+  } else {
+    body.classList.replace("dark", "light");
+    toggleBtn.textContent = "🌙";
+    localStorage.setItem("theme", "light");
+  }
 });
