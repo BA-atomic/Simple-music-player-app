@@ -109,11 +109,21 @@ h1 {
   gap: 10px;
 }
 
+.fa-solid {
+  color: var(--textColor);
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.activeControl {
+  color: lime;
+}
+
 #buttons {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 45px;
+  gap: 32px;
   margin-bottom: 15px;
 }
 
@@ -208,7 +218,7 @@ button:hover {
 }
 
 .playListSong.active {
-  background-color: #c8c6af;
+  background-color: #5A2328;
 }
 
 .title {

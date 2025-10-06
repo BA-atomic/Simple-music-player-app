@@ -16,6 +16,8 @@ const errorContainer = document.querySelector("#showError");
 const overlayError = document.querySelector("#overlayError");
 const toggleBtn = document.querySelector("#themeToggle");
 const body = document.body;
+const shuffleBtn = document.querySelector("#shuffleBtn");
+const repeatBtn = document.querySelector("#repeatBtn");
 
 const songs = [
   {
@@ -232,7 +234,14 @@ volume.addEventListener("input", updateVolume);
 nextBtn.addEventListener("click", nextSong);
 prevBtn.addEventListener("click", prevSong);
 audioPlayer.addEventListener("ended", () => {
-  nextSong();
+  if (isRepeating) {
+    loadSong(currentSongIndex);
+    playSong();
+  } else if (isShuffling) {
+    shuffleSong();
+  } else {
+    nextSong();
+  }
   highlightCurrentSong(currentSongIndex);
 });
 
@@ -292,5 +301,50 @@ toggleBtn.addEventListener("click", () => {
     body.classList.replace("dark", "light");
     toggleBtn.textContent = "🌙";
     localStorage.setItem("theme", "light");
+  }
+});
+
+function shuffleSong() {
+  if (songs.length === 1) {
+    currentSongIndex = 0;
+    loadSong(currentSongIndex);
+    playSong();
+    return;
+  }
+  let randomSong = Math.floor(Math.random() * songs.length);
+  while (randomSong === currentSongIndex) {
+    randomSong = Math.floor(Math.random() * songs.length);
+  }
+
+  currentSongIndex = randomSong;
+  loadSong(randomSong);
+  playSong();
+}
+
+let isShuffling = false;
+let isRepeating = false;
+shuffleBtn.addEventListener("click", () => {
+  isShuffling = true;
+  if (isShuffling) {
+    isRepeating = false;
+    shuffleBtn.classList.toggle("activeControl");
+    repeatBtn.classList.remove("activeControl");
+  }
+
+  if (!shuffleBtn.classList.contains("activeControl")) {
+    isShuffling = false;
+  }
+});
+
+repeatBtn.addEventListener("click", () => {
+  isRepeating = true;
+  if (isRepeating) {
+    isShuffling = false;
+    repeatBtn.classList.toggle("activeControl");
+    shuffleBtn.classList.remove("activeControl");
+  }
+
+  if (!repeatBtn.classList.contains("activeControl")) {
+    isRepeating = false;
   }
 });

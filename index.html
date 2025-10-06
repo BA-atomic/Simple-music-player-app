@@ -5,11 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Simple Music App</title>
     <link rel="stylesheet" href="index.css" />
+    <script
+      src="https://kit.fontawesome.com/3eebc21ee0.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body class="light">
     <div id="musicApp">
       <div id="container">
-         <button id="themeToggle">🌙</button>
+        <button id="themeToggle">🌙</button>
         <h1>🎵 Keep on streaming</h1>
 
         <div id="box">
@@ -27,12 +31,15 @@
           <div id="progressDisplayText">0:00 / 0:00</div>
         </div>
 
-        <div id="controls">
+        <div class="controls">
           <div id="buttons">
+            <i id="shuffleBtn" class="fa-solid fa-shuffle"></i>
             <button id="prevBtn">⏮</button>
             <button id="playBtn">▶</button>
             <button id="nextBtn">⏭</button>
+            <i id="repeatBtn" class="fa-solid fa-repeat"></i>
           </div>
+
 
           <div id="volumeControl">
             <span id="volumeIcon">🔊</span>
