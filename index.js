@@ -155,7 +155,6 @@ function loadSong(index) {
 function nextSong() {
   currentSongIndex = (currentSongIndex + 1) % songs.length;
   loadSong(currentSongIndex);
-  highlightCurrentSong(currentSongIndex);
   playSong();
 }
 
@@ -163,7 +162,6 @@ function prevSong() {
   currentSongIndex =
     currentSongIndex === 0 ? songs.length - 1 : currentSongIndex - 1;
   loadSong(currentSongIndex);
-  highlightCurrentSong(currentSongIndex);
   playSong();
 }
 
@@ -197,10 +195,25 @@ function changeImage(fallback) {
   fallback.alt = "no cover";
 }
 
-window.addEventListener("load", () => {
+function initialize() {
+  const savedTheme = localStorage.getItem("theme");
+
+  if (savedTheme) {
+    body.className = savedTheme;
+    if (savedTheme === "dark") {
+      toggleBtn.textContent = "☀️";
+    } else {
+      toggleBtn.textContent = "🌙";
+    }
+  } else {
+    body.classList.add("light");
+  }
+
   loadSong(0);
   updateVolume();
-});
+}
+
+window.addEventListener("load", initialize);
 
 audioPlayer.addEventListener("timeupdate", () => {
   const currentTime = convertSecondstoMinsSecs(audioPlayer.currentTime);
@@ -268,21 +281,6 @@ document.querySelectorAll(".playlistCover").forEach((img) => {
   img.addEventListener("error", () => {
     changeImage(img);
   });
-});
-
-window.addEventListener("load", () => {
-  const savedTheme = localStorage.getItem("theme");
-
-  if (savedTheme) {
-    body.className = savedTheme;
-    if (savedTheme === "dark") {
-      toggleBtn.textContent = "☀️";
-    } else {
-      toggleBtn.textContent = "🌙";
-    }
-  } else {
-    body.classList.add("light");
-  }
 });
 
 toggleBtn.addEventListener("click", () => {

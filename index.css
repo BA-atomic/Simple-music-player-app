@@ -229,7 +229,7 @@ button:hover {
   top: 40%;
   transform: translateX(-50%);
   border-radius: 10px;
-  color: var(--textColor);
+  color: #ccc;
   display: none;
   padding: 16px 18px;
   box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3);
