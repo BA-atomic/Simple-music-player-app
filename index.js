@@ -215,6 +215,17 @@ function initialize() {
   updateVolume();
 }
 
+function songHandler() {
+    if (isRepeating) {
+      loadSong(currentSongIndex);
+      playSong();
+    } else if (isShuffling) {
+      shuffleSong();
+    } else {
+      nextSong();
+    }
+}
+
 window.addEventListener("load", initialize);
 
 audioPlayer.addEventListener("timeupdate", () => {
@@ -231,17 +242,19 @@ audioPlayer.addEventListener("timeupdate", () => {
 
 playBtn.addEventListener("click", isPlaying);
 volume.addEventListener("input", updateVolume);
-nextBtn.addEventListener("click", nextSong);
-prevBtn.addEventListener("click", prevSong);
-audioPlayer.addEventListener("ended", () => {
+nextBtn.addEventListener("click", songHandler);
+prevBtn.addEventListener("click", () => {
   if (isRepeating) {
     loadSong(currentSongIndex);
     playSong();
   } else if (isShuffling) {
     shuffleSong();
   } else {
-    nextSong();
+    prevSong();
   }
+});
+audioPlayer.addEventListener("ended", () => {
+ songHandler();
   highlightCurrentSong(currentSongIndex);
 });
 
