@@ -93,6 +93,9 @@ const songs = [
 ];
 
 let currentSongIndex = 0;
+const playListItems = [];
+let isShuffling = false;
+let isRepeating = false;
 
 function convertSecondstoMinsSecs(seconds) {
   if (!Number.isFinite(seconds) || seconds < 0) return "0:00";
@@ -199,6 +202,15 @@ function changeImage(fallback) {
 
 function initialize() {
   const savedTheme = localStorage.getItem("theme");
+  isShuffling = localStorage.getItem("isShuffling") === "true";
+  isRepeating = localStorage.getItem("isRepeating") === "true";
+
+  if (isShuffling) {
+    shuffleBtn.classList.add("activeControl");
+  }
+  if (isRepeating) {
+    repeatBtn.classList.add("activeControl");
+  }
 
   if (savedTheme) {
     body.className = savedTheme;
@@ -216,14 +228,27 @@ function initialize() {
 }
 
 function songHandler() {
-    if (isRepeating) {
-      loadSong(currentSongIndex);
-      playSong();
-    } else if (isShuffling) {
-      shuffleSong();
-    } else {
-      nextSong();
-    }
+  if (isRepeating) {
+    loadSong(currentSongIndex);
+    playSong();
+  } else if (isShuffling) {
+    shuffleSong();
+  } else {
+    nextSong();
+  }
+}
+
+function toggleClass(classname, mainElement, ...others) {
+  if (!mainElement) return;
+  mainElement.classList.toggle(classname);
+  others.forEach((other) => {
+    other.classList.remove(classname);
+  });
+}
+
+function saveMode() {
+  localStorage.setItem("isRepeating", isRepeating);
+  localStorage.setItem("isShuffling", isShuffling);
 }
 
 window.addEventListener("load", initialize);
@@ -254,7 +279,7 @@ prevBtn.addEventListener("click", () => {
   }
 });
 audioPlayer.addEventListener("ended", () => {
- songHandler();
+  songHandler();
   highlightCurrentSong(currentSongIndex);
 });
 
@@ -263,8 +288,6 @@ progressContainer.addEventListener("click", (e) => {
   const percent = (e.clientX - rect.left) / rect.width;
   audioPlayer.currentTime = percent * audioPlayer.duration;
 });
-
-const playListItems = [];
 
 songs.forEach((song, idx) => {
   const playListDiv = document.createElement("div");
@@ -334,30 +357,28 @@ function shuffleSong() {
   playSong();
 }
 
-let isShuffling = false;
-let isRepeating = false;
 shuffleBtn.addEventListener("click", () => {
   isShuffling = true;
   if (isShuffling) {
     isRepeating = false;
-    shuffleBtn.classList.toggle("activeControl");
-    repeatBtn.classList.remove("activeControl");
+    toggleClass("activeControl", shuffleBtn, repeatBtn);
   }
 
   if (!shuffleBtn.classList.contains("activeControl")) {
     isShuffling = false;
   }
+  saveMode();
 });
 
 repeatBtn.addEventListener("click", () => {
   isRepeating = true;
   if (isRepeating) {
     isShuffling = false;
-    repeatBtn.classList.toggle("activeControl");
-    shuffleBtn.classList.remove("activeControl");
+    toggleClass("activeControl", repeatBtn, shuffleBtn);
   }
 
   if (!repeatBtn.classList.contains("activeControl")) {
     isRepeating = false;
   }
+  saveMode();
 });
