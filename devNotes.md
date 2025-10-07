@@ -533,3 +533,17 @@ Example:
 - You’ll call loadSong() and playSong() once a different song is selected.
 
 - This function will be called from your "ended" event listener or next/prev logic whenever shuffle is active.
+
+### saving the states to localStorage(to remember the shuffle& repeat button)
+- In respective buttons event listener set the boolean of the state in localStage
+```
+localStorage.setItem("isRepeating", isRepeating)
+localStorage.setItem("isShuffling", isShuffling)
+```
+put both in the two button listener or just put both in a helper function
+
+- in the `initialize()` helper function used in the window onloand event, get the booleans with
+```
+=== "true"
+```
+and convert them to booleans(they're stored in strings)....so write a single if each for the isShuffling & isRepeaating to add the `classList`
