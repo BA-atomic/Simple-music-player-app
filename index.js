@@ -21,74 +21,158 @@ const repeatBtn = document.querySelector("#repeatBtn");
 
 const songs = [
   {
-    title: "SoundHelix Song 1",
+    title: "Midnight Cruise",
     artist: "DJ Harmony",
     url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
     cover:
-      "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop", // DJ vinyl
+      "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop",
   },
   {
-    title: "SoundHelix Song 2",
-    artist: "Electro Vibes",
+    title: "Vibe Avenue",
+    artist: "Temi Blaze",
     url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
     cover:
-      "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&h=400&fit=crop", // neon lights
+      "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&h=400&fit=crop",
   },
   {
-    title: "SoundHelix Song 3",
-    artist: "Midnight Beats",
+    title: "Skyline Drip",
+    artist: "Rhéma",
     url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
     cover:
-      "https://images.unsplash.com/photo-1526481280691-906f61c3965a?w=400&h=400&fit=crop", // dark city
+      "https://images.unsplash.com/photo-1526481280691-906f61c3965a?w=400&h=400&fit=crop",
   },
   {
-    title: "SoundHelix Song 4",
-    artist: "Lofi Dreams",
+    title: "Echoes of Lagos",
+    artist: "Kweku Nova",
     url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",
     cover:
-      "https://images.unsplash.com/photo-1513883049090-d0b7439799bf?w=400&h=400&fit=crop", // chill vibes
+      "https://images.unsplash.com/photo-1513883049090-d0b7439799bf?w=400&h=400&fit=crop",
   },
   {
-    title: "SoundHelix Song 5",
-    artist: "The Chill Collective",
+    title: "Golden Hour",
+    artist: "Ayra Cee",
     url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3",
     cover:
-      "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=400&h=400&fit=crop", // nature calm
+      "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=400&h=400&fit=crop",
   },
   {
-    title: "SoundHelix Song 6",
+    title: "City Nights",
     artist: "Urban Flow",
     url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3",
     cover:
-      "https://images.unsplash.com/photo-1507874457470-272b3c8d8ee2?w=400&h=400&fit=crop", // city night
+      "https://images.unsplash.com/photo-1507874457470-272b3c8d8ee2?w=400&h=400&fit=crop",
   },
   {
-    title: "SoundHelix Song 7",
-    artist: "Neon Skyline",
+    title: "Neon Drip",
+    artist: "JulsOnIt",
     url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3",
     cover:
-      "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=400&h=400&fit=crop", // neon skyline
+      "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=400&h=400&fit=crop",
   },
   {
-    title: "SoundHelix Song 8",
-    artist: "Groove Masters",
+    title: "Moonlit Drive",
+    artist: "The Chill Collective",
     url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3",
     cover:
-      "https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?w=400&h=400&fit=crop", // vinyl collection
+      "https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?w=400&h=400&fit=crop",
   },
   {
-    title: "SoundHelix Song 9",
-    artist: "Cloud Nine",
+    title: "Cloud Therapy",
+    artist: "Lofi Guru",
     url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3",
     cover:
-      "https://images.unsplash.com/photo-1503264116251-35a269479413?w=400&h=400&fit=crop", // dreamy clouds
+      "https://images.unsplash.com/photo-1503264116251-35a269479413?w=400&h=400&fit=crop",
   },
   {
-    title: "SoundHelix Song 10",
-    artist: "Rhythm Avenue",
+    title: "Rhythm & Waves",
+    artist: "Tems",
     url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3",
     cover:
-      "https://images.unsplash.com/photo-1507874457470-272b3c8d8ee2?w=400&h=400&fit=crop", // street style
+      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=400&h=400&fit=crop",
+  },
+  {
+    title: "Palmwine Dreams",
+    artist: "Boogie Santana",
+    url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-11.mp3",
+    cover:
+      "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=400&h=400&fit=crop",
+  },
+  {
+    title: "Sunset Cruise",
+    artist: "Waveform",
+    url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-12.mp3",
+    cover:
+      "https://images.unsplash.com/photo-1504805572947-34fad45aed93?w=400&h=400&fit=crop",
+  },
+  {
+    title: "Midday Mirage",
+    artist: "Nii Soul",
+    url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-13.mp3",
+    cover:
+      "https://images.unsplash.com/photo-1504805572947-34fad45aed93?w=400&h=400&fit=crop",
+  },
+  {
+    title: "Synthetic Love",
+    artist: "Amaarae",
+    url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-14.mp3",
+    cover:
+      "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&h=400&fit=crop",
+  },
+  {
+    title: "Red Velvet Nights",
+    artist: "Odunsi (The Engine)",
+    url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-15.mp3",
+    cover:
+      "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=400&h=400&fit=crop",
+  },
+  {
+    title: "Daydream Loop",
+    artist: "Maka",
+    url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-16.mp3",
+    cover:
+      "https://images.unsplash.com/photo-1485579149621-3123dd979885?w=400&h=400&fit=crop",
+  },
+  {
+    title: "Energy Flow",
+    artist: "Nonso Amadi",
+    url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-17.mp3",
+    cover:
+      "https://images.unsplash.com/photo-1507874457470-272b3c8d8ee2?w=400&h=400&fit=crop",
+  },
+  {
+    title: "Drift Mode",
+    artist: "SGaWD",
+    url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-18.mp3",
+    cover:
+      "https://images.unsplash.com/photo-1526481280691-906f61c3965a?w=400&h=400&fit=crop",
+  },
+  {
+    title: "Cool Breeze",
+    artist: "Chike",
+    url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3",
+    cover:
+      "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=400&h=400&fit=crop",
+  },
+  {
+    title: "After Dark",
+    artist: "WurlD",
+    url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3",
+    cover:
+      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=400&h=400&fit=crop",
+  },
+  {
+    title: "Noir Nights",
+    artist: "Lady Donli",
+    url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+    cover:
+      "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop",
+  },
+  {
+    title: "Velvet Vibes",
+    artist: "Tomé",
+    url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+    cover:
+      "https://images.unsplash.com/photo-1504805572947-34fad45aed93?w=400&h=400&fit=crop",
   },
 ];
 
