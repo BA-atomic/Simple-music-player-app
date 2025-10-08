@@ -204,7 +204,10 @@ function initialize() {
   const savedTheme = localStorage.getItem("theme");
   isShuffling = localStorage.getItem("isShuffling") === "true";
   isRepeating = localStorage.getItem("isRepeating") === "true";
-
+  isLiked = localStorage.getItem("isLiked") === "true";
+  if (isLiked) {
+    likeBtn.classList.add("activeLike");
+  }
   if (isShuffling) {
     shuffleBtn.classList.add("activeControl");
   }
@@ -246,9 +249,8 @@ function toggleClass(classname, mainElement, ...others) {
   });
 }
 
-function saveMode() {
-  localStorage.setItem("isRepeating", isRepeating);
-  localStorage.setItem("isShuffling", isShuffling);
+function saveMode(key, value) {
+  localStorage.setItem(key, value);
 }
 
 window.addEventListener("load", initialize);
@@ -367,7 +369,8 @@ shuffleBtn.addEventListener("click", () => {
   if (!shuffleBtn.classList.contains("activeControl")) {
     isShuffling = false;
   }
-  saveMode();
+  saveMode("isRepeating", isRepeating);
+  saveMode("isShuffling", isShuffling);
 });
 
 repeatBtn.addEventListener("click", () => {
@@ -380,5 +383,17 @@ repeatBtn.addEventListener("click", () => {
   if (!repeatBtn.classList.contains("activeControl")) {
     isRepeating = false;
   }
-  saveMode();
+  saveMode("isRepeating", isRepeating);
+  saveMode("isShuffling", isShuffling);
+});
+
+const likeBtn = document.querySelector(".likeBtn");
+let isLiked = false;
+likeBtn.addEventListener("click", () => {
+  isLiked = true;
+  toggleClass("activeLike", likeBtn);
+  if (!likeBtn.classList.contains("activeLike")) {
+    isLiked = false;
+  }
+  saveMode("isLiked", isLiked);
 });
