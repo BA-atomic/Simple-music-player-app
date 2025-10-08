@@ -547,3 +547,8 @@ put both in the two button listener or just put both in a helper function
 === "true"
 ```
 and convert them to booleans(they're stored in strings)....so write a single if each for the isShuffling & isRepeaating to add the `classList`
+
+## 17. Adding a favorite/ like functionality
+- Add a button, select in html an use the toggle class helper function to update the color when clicked.
+- Set the class to localStorage to remember the class.
+- Get and convert the boolean and set the class on load.
