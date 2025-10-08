@@ -245,6 +245,7 @@ function nextSong() {
   currentSongIndex = (currentSongIndex + 1) % songs.length;
   loadSong(currentSongIndex);
   playSong();
+  likeBtn.classList.remove("activeLike");
 }
 
 function prevSong() {
@@ -252,6 +253,7 @@ function prevSong() {
     currentSongIndex === 0 ? songs.length - 1 : currentSongIndex - 1;
   loadSong(currentSongIndex);
   playSong();
+  likeBtn.classList.remove("activeLike");
 }
 
 function updateVolume() {
